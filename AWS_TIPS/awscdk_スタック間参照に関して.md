@@ -1,8 +1,8 @@
-#　AWS CDKスタック間参照に関して
+# AWS CDKスタック間参照に関して
 
 AWS CDKのスタック間参照に関して調べてみた。
 
-##　スタックを分けるべきか
+## スタックを分けるべきか
 
 できるだけスタックを分けないほうが望ましい。理由としては以下がある。
 
@@ -15,7 +15,7 @@ AWS CDKのスタック間参照に関して調べてみた。
 - リージョンが異なる
 - リソースをデプロイする間に手作業が必要（ECRスタックへのDockerイメージpushを手作業でやる、フロントエンドをデプロイする）
 
-##　スタック間参照の前提
+## スタック間参照の前提
 
 - 深い参照
   CloudFormationに変換された際に、importとなっているもの cdkoutputやprops渡し
@@ -28,8 +28,10 @@ AWS CDKのスタック間参照に関して調べてみた。
 ※　パラメーターストア経由でも、DBなど更新できないリソースを参照している場合、実質的に深い参照になっている場合がある
 ※　props参照は依存関係の向きが逆なるので注意
 
+##　パラメータストアでも気をつけること
+
 パラメーターストアにも気をつけないといけないことがある
-- １スタック200個まで
+- 1スタック200個まで
 - CDK側で依存関係を見てデプロイ順序を解決してくれないので、明示的に指定する必要がある（addDependencyメソッドでこのパラメータに依存していますという依存関係を明示）
 - valueFromLookupに格納された場合、cdk.context.jsonにキャッシュされる。キャッシュがある場合はそちらを参照するので注意（キャッシュ削除するコマンドもある）
 
@@ -41,12 +43,12 @@ AWS CDKのスタック間参照に関して調べてみた。
 
 - [AWS CDK Tips: スタックの分け方について](https://tmokmss.hatenablog.com/entry/20221121/1669032738)
 
--[3年間運用したCDKの失敗から学ぶCDK開発のプラクティス](https://www.docswell.com/s/integrated1453/5GXL7N-AWS-CDK-Conference-Japan-2023#p39)
+- [3年間運用したCDKの失敗から学ぶCDK開発のプラクティス](https://www.docswell.com/s/integrated1453/5GXL7N-AWS-CDK-Conference-Japan-2023#p39)
 
--[CDK初心者が開発で遭遇したトラブルと解決法](https://speakerdeck.com/takanariohata/cdkchu-xin-zhe-gakai-fa-dezao-yu-sitatoraburutojie-jue-fa?slide=9)
+- [CDK初心者が開発で遭遇したトラブルと解決法](https://speakerdeck.com/takanariohata/cdkchu-xin-zhe-gakai-fa-dezao-yu-sitatoraburutojie-jue-fa?slide=9)
 
--[CDKでスタック間参照してはならない](https://tech.uzabase.com/entry/2024/09/27/103506)
+- [CDKでスタック間参照してはならない](https://tech.uzabase.com/entry/2024/09/27/103506)
 
--[クロススタック参照で、参照先から参照を削除する場合は、参照元で exportValue を使おう](https://dev.classmethod.jp/articles/aws-cdk-closs-stack-reference-exportvalue/)
+- [クロススタック参照で、参照先から参照を削除する場合は、参照元で exportValue を使おう](https://dev.classmethod.jp/articles/aws-cdk-closs-stack-reference-exportvalue/)
 
--[実践 AWS CDK 〜 いろいろな参照のカタチと使い分け 〜](https://speakerdeck.com/konokenj/reference-patterns-in-aws-cdk?slide=12)
+- [実践 AWS CDK 〜 いろいろな参照のカタチと使い分け 〜](https://speakerdeck.com/konokenj/reference-patterns-in-aws-cdk?slide=12)

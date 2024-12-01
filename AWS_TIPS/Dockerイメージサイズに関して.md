@@ -18,5 +18,7 @@
 参考文献
 
 -[コンテナイメージサイズ削減手法の効果](https://qiita.com/y_k_individual/items/ccd17f6f80a3024a0884)
+
 -[軽量なDockerイメージを作るために意識すること](軽量なDockerイメージを作るために意識すること)
+
 -[Docker Buildにおけるリードタイム短縮のための3つの改善ポイント](https://tech.plaid.co.jp/improve_docker_build_efficiency#3.%20cache%E3%81%AE%E6%9C%89%E5%8A%B9%E6%B4%BB%E7%94%A8)
